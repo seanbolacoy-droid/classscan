@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClassScan | Reports</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <main class="page-container">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Attendance Reports</h1>
+
+                <p>
+                    Generate and review attendance reports.
+                </p>
+
+            </div>
+
+
+            <a href="website.html" class="back-button">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <h2>Generate Report</h2>
+
+            <p class="section-description">
+                Select a date range to view attendance records.
+            </p>
+
+
+            <div class="report-filter">
+
+                <div class="input-group">
+
+                    <label for="startDate">
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="startDate"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="endDate">
+                        End Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="endDate"
+                    >
+
+                </div>
+
+
+                <button
+                    onclick="generateReport()"
+                    class="maroon-button">
+
+                    Generate Report
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Report Results</h2>
+
+                    <p class="section-description">
+                        Attendance records within the selected dates.
+                    </p>
+
+                </div>
+
+
+                <button
+                    onclick="window.print()"
+                    class="secondary-action-button">
+
+                    🖨 Print Report
+
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportTable">
+
+                        <tr>
+
+                            <td colspan="5">
+                                Select a date range and generate a report.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <footer>
+
+            <p>
+                © 2026 ClassScan • Attendance Reports
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

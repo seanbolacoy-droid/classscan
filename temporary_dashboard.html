@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClassScan - Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="logo">
+                <h1>ClassScan</h1>
+                <p>Student Attendance Monitoring System</p>
+            </div>
+
+            <h2>Dashboard</h2>
+
+            <p class="subtitle">
+                You are successfully logged in.
+            </p>
+
+            <button class="btn primary-btn" onclick="logout()">
+                Log Out
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+        function logout() {
+
+            localStorage.removeItem("classScanLoggedIn");
+
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>

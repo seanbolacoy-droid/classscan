@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassScan - Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="logo">
+                <h1>ClassScan</h1>
+                <p>Student Attendance Monitoring System</p>
+            </div>
+
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Log in to your account</p>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label for="loginUsername">Username</label>
+                    <input
+                        type="text"
+                        id="loginUsername"
+                        placeholder="Enter your username"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="loginPassword">Password</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn primary-btn">
+                    Log In
+                </button>
+
+                <p id="loginMessage" class="message"></p>
+
+            </form>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <p class="account-text">
+                Don't have an account?
+            </p>
+
+            <a href="create_account.html" class="btn secondary-btn">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>

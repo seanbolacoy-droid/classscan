@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClassScan | Attendance</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <main class="page-container">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Attendance Records</h1>
+
+                <p>
+                    View and monitor student attendance.
+                </p>
+
+            </div>
+
+
+            <a href="website.html" class="back-button">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="attendance-summary">
+
+            <div class="summary-card">
+
+                <span>Present</span>
+
+                <strong id="attendancePresent">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>Late</span>
+
+                <strong id="attendanceLate">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>Total Records</span>
+
+                <strong id="attendanceTotal">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Today's Attendance</h2>
+
+                    <p class="section-description">
+                        Attendance records for today.
+                    </p>
+
+                </div>
+
+
+                <button
+                    onclick="clearAttendance()"
+                    class="danger-button">
+
+                    Clear Records
+
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="attendancePageTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <footer>
+
+            <p>
+                © 2026 ClassScan • Attendance Monitoring
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

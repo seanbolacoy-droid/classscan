@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClassScan | Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">CS</div>
+
+            <div>
+                <h2>ClassScan</h2>
+                <span>Attendance System</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <a href="website.html" class="nav-link active">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="students.html" class="nav-link">
+                <span>👨‍🎓</span>
+                Students
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <span>🕒</span>
+                Attendance
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <span>📈</span>
+                Reports
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button class="scan-button" onclick="startScan()">
+                📷 Start Face Scan
+            </button>
+
+            <button class="logout-button" onclick="logout()">
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <div class="profile">
+
+    <div class="profile-icon" id="profileIcon">
+        A
+    </div>
+
+    <div>
+        <strong id="profileName">Adviser</strong>
+        <small id="profileUsername">Administrator</small>
+    </div>
+
+</div>
+
+        </header>
+
+        
+<img src="logo.png"
+     alt="ClassScan Logo"
+     class="dashboard-welcome-logo">
+
+        <p>Welcome to ClassScan</p>
+        <section class="welcome-panel">
+
+            <p class="welcome-text">
+                Welcome to ClassScan
+            </p>
+
+            <h2 id="currentDate">
+                Loading date...
+            </h2>
+
+            <div id="currentTime" class="current-time">
+                Loading time...
+            </div>
+
+            <p class="time-description">
+                Current local time
+            </p>
+
+        </section>
+
+
+        <section class="stats">
+
+            <div class="stat-card present">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+                    <p>Present</p>
+                    <h2 id="presentCount">0</h2>
+                    <span>Students today</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card late">
+
+                <div class="stat-icon">
+                    ⏱
+                </div>
+
+                <div>
+                    <p>Late</p>
+                    <h2 id="lateCount">0</h2>
+                    <span>Students today</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card absent">
+
+                <div class="stat-icon">
+                    ×
+                </div>
+
+                <div>
+                    <p>Absent</p>
+                    <h2 id="absentCount">0</h2>
+                    <span>Students today</span>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card students">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+                    <p>Total Students</p>
+                    <h2 id="studentCount">30</h2>
+                    <span>Registered students</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="content-grid">
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Manage your attendance system</p>
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        onclick="location.href='students.html'"
+                        class="action-card">
+
+                        <div class="action-icon">
+                            👨‍🎓
+                        </div>
+
+                        <div>
+                            <strong>Manage Students</strong>
+                            <span>Add or manage student records</span>
+                        </div>
+
+                        <b>→</b>
+
+                    </button>
+
+
+                    <button
+                        onclick="location.href='attendance.html'"
+                        class="action-card">
+
+                        <div class="action-icon">
+                            📋
+                        </div>
+
+                        <div>
+                            <strong>View Attendance</strong>
+                            <span>Check today's attendance</span>
+                        </div>
+
+                        <b>→</b>
+
+                    </button>
+
+
+                    <button
+                        onclick="location.href='reports.html'"
+                        class="action-card">
+
+                        <div class="action-icon">
+                            📊
+                        </div>
+
+                        <div>
+                            <strong>View Reports</strong>
+                            <span>Generate attendance reports</span>
+                        </div>
+
+                        <b>→</b>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel scan-panel">
+
+                <div class="scan-camera">
+
+                    <div class="camera-icon">
+                        📷
+                    </div>
+
+                    <h2>Face Recognition</h2>
+
+                    <p>
+                        Scan a student's face to automatically
+                        record attendance.
+                    </p>
+
+                    <button
+                        onclick="startScan()"
+                        class="primary-button">
+
+                        Start Face Scan
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel attendance-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Today's Attendance</h2>
+                    <p>Latest attendance records</p>
+                </div>
+
+                <button
+                    onclick="location.href='attendance.html'"
+                    class="view-button">
+
+                    View All
+
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="attendanceTable">
+
+                        <tr>
+                            <td>2026-001</td>
+                            <td>Sample Student</td>
+                            <td>7:30 AM</td>
+
+                            <td>
+                                <span class="status present-status">
+                                    Present
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <p>
+                © 2026 ClassScan • Automated Student Attendance Monitoring System
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>

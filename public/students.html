@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClassScan | Students</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="page-container">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Student Management</h1>
+                <p>Manage registered students in ClassScan.</p>
+            </div>
+
+            <a href="website.html" class="back-button">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <h2>Add Student</h2>
+
+            <p class="section-description">
+                Register a student in the ClassScan system.
+            </p>
+
+            <form id="studentForm" class="student-form">
+
+                <div class="form-row">
+
+                    <div class="input-group">
+
+                        <label for="studentId">
+                            Student ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="e.g. 2026-001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="studentName">
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter student's name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="studentSection">
+                            Section
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentSection"
+                            placeholder="e.g. ICT 12-A"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="maroon-button">
+                    + Add Student
+                </button>
+
+                <p id="studentMessage" class="message"></p>
+
+            </form>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Registered Students</h2>
+                    <p class="section-description">
+                        Students currently registered in ClassScan.
+                    </p>
+                </div>
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    class="search-input"
+                    placeholder="Search student..."
+                >
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Section</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentTable">
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+       
+        <div class="page-card">
+            <h2>Face Enrollment</h2>
+
+            <p class="section-description">
+                Enroll a consenting participant's face for the attendance prototype.
+            </p>
+
+            <div class="input-group">
+                <label for="enrollmentStudent">Select Registered Student</label>
+                <select id="enrollmentStudent" required>
+                    <option value="">Loading students...</option>
+                </select>
+            </div>
+
+            <div style="max-width: 480px; margin-top: 16px;">
+                <video
+                    id="enrollmentVideo"
+                    autoplay
+                    muted
+                    playsinline
+                    style="width: 100%; min-height: 240px; background: #111; border-radius: 12px;">
+                </video>
+            </div>
+
+            <p id="enrollmentStatus" role="status" aria-live="polite">
+                Camera not started.
+            </p>
+
+            <button type="button" id="startEnrollmentCamera" class="primary-button">
+                Start Enrollment Camera
+            </button>
+
+            <button type="button" id="enrollFaceButton" class="maroon-button" disabled>
+                Enroll Face
+            </button>
+
+            <button type="button" id="stopEnrollmentCamera" class="danger-button">
+                Stop Camera
+            </button>
+
+            <p class="section-description">
+                Only enroll participants who have given informed permission.
+                Enrollment stores a numerical face descriptor in the local prototype database.
+            </p>
+        </div>
+
+        <footer>
+            <p>© 2026 ClassScan • Student Management</p>
+        </footer>
+
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
