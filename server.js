@@ -306,27 +306,9 @@ app.delete("/api/students/:id", async (req, res) => {
 
 const PORT = Number(process.env.PORT || 3000);
 
-async function startServer() {
-    try {
-        const connection = await db.getConnection();
 
-        console.log(
-            "Connected to MySQL database:",
-            process.env.DB_NAME
-        );
+const PORT = Number(process.env.PORT || 3000);
 
-        connection.release();
-
-    
-        app.listen(PORT, "0.0.0.0", () => {
-            console.log(
-                `CLASSSCAN server running at http://localhost:${PORT}`
-            );
-        });
-    } catch (error) {
-        console.error("Could not connect to MySQL:", error.message);
-        process.exitCode = 1;
-    }
-}
-
-startServer();
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`CLASSSCAN server running on port ${PORT}`);
+});
