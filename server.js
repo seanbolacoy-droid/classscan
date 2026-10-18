@@ -81,11 +81,9 @@ const db = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     ssl: {
-        ca: fs.readFileSync(
-            require("path").join(__dirname, "certs", "aiven-ca.pem")
-        ),
-        rejectUnauthorized: true
-    },
+    ca: process.env.AIVEN_CA_CERT?.replace(/\\n/g, "\n"),
+    rejectUnauthorized: true
+},
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
