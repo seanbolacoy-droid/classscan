@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassScan | Section Schedules</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .schedule-upload {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: 1px dashed #999;
+            border-radius: 10px;
+            background: #fafafa;
+            box-sizing: border-box;
+        }
+
+        .schedule-times {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .schedule-times input,
+        .schedule-section-input,
+        .schedule-text {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .schedule-text {
+            min-height: 180px;
+            resize: vertical;
+            font-family: monospace;
+        }
+
+        .schedule-note {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .schedule-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .schedule-status {
+            margin-top: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 600px) {
+            .schedule-times {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page-container">
+
+        <div class="page-header">
+            <div>
+                <h1>Section Schedules</h1>
+                <p>Upload and confirm the first-class start times for each section.</p>
+            </div>
+
+            <a href="website.html" class="back-button">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <div class="page-card">
+            <h2>1. Upload Timetable</h2>
+
+            <p class="section-description">
+                Select a timetable photo or screenshot. ClassScan will
+                extract its text for you to review.
+            </p>
+
+            <form id="scheduleUploadForm">
+                <div class="input-group">
+                    <label for="scheduleSection">Section Name</label>
+                    <input
+                        class="schedule-section-input"
+                        type="text"
+                        id="scheduleSection"
+                        placeholder="e.g. Grade 12 - Resilience"
+                        maxlength="100"
+                        required
+                    >
+                    <p class="schedule-note">
+                        Use the same section name registered for its students.
+                    </p>
+                </div>
+
+                <div class="input-group">
+                    <label for="scheduleImage">Timetable Image</label>
+                    <input
+                        class="schedule-upload"
+                        type="file"
+                        id="scheduleImage"
+                        accept="image/jpeg,image/png,image/webp"
+                        required
+                    >
+                    <p class="schedule-note">
+                        JPG, PNG, or WEBP only. Maximum file size: 5 MB.
+                    </p>
+                </div>
+
+                <div class="schedule-actions">
+                    <button
+                        type="submit"
+                        id="analyzeScheduleButton"
+                        class="maroon-button"
+                    >
+                        Analyze Timetable
+                    </button>
+                </div>
+
+                <p id="recognitionMessage"
+                   class="schedule-status"
+                   role="status"
+                   aria-live="polite"></p>
+            </form>
+        </div>
+
+        <div class="page-card">
+            <h2>2. Review Extracted Text</h2>
+
+            <p class="section-description">
+                Check the recognized text below. OCR may mix up columns
+                or misread some words, so use your original timetable
+                when confirming the start times.
+            </p>
+
+            <label for="extractedText">Recognized Text</label>
+            <textarea
+                id="extractedText"
+                class="schedule-text"
+                placeholder="Recognized timetable text will appear here..."
+                readonly
+            ></textarea>
+        </div>
+
+        <div class="page-card">
+            <h2>3. Confirm First-Class Start Times</h2>
+
+            <p class="section-description">
+                Enter the start time of the first scheduled class for
+                each school day. These are the times ClassScan will use
+                when determining attendance status.
+            </p>
+
+            <p class="schedule-note">
+                Present: arrival at or before the confirmed start time.
+                Late: arrival after the confirmed start time.
+                The adviser must verify these times before saving.
+            </p>
+
+            <form id="saveScheduleForm">
+                <div class="input-group">
+                    <label for="confirmedSection">Section</label>
+                    <input
+                        type="text"
+                        id="confirmedSection"
+                        maxlength="100"
+                        required
+                        readonly
+                    >
+                </div>
+
+                <div class="schedule-times">
+                    <div class="input-group">
+                        <label for="mondayStart">Monday Start Time</label>
+                        <input type="time" id="mondayStart" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tuesdayStart">Tuesday Start Time</label>
+                        <input type="time" id="tuesdayStart" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="wednesdayStart">Wednesday Start Time</label>
+                        <input type="time" id="wednesdayStart" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="thursdayStart">Thursday Start Time</label>
+                        <input type="time" id="thursdayStart" required>
+                    </div>
+                </div>
+
+                <div class="schedule-actions">
+                    <button
+                        type="submit"
+                        id="saveScheduleButton"
+                        class="maroon-button"
+                    >
+                        Save Confirmed Schedule
+                    </button>
+                </div>
+
+                <p id="saveScheduleMessage"
+                   class="schedule-status"
+                   role="status"
+                   aria-live="polite"></p>
+            </form>
+        </div>
+
+        <footer>
+            <p>© 2026 ClassScan • Section Schedules</p>
+        </footer>
+
+    </main>
+
+    <script>
+        const uploadForm = document.getElementById("scheduleUploadForm");
+        const saveForm = document.getElementById("saveScheduleForm");
+
+        const imageInput = document.getElementById("scheduleImage");
+        const sectionInput = document.getElementById("scheduleSection");
+        const confirmedSection = document.getElementById("confirmedSection");
+
+        const extractedText = document.getElementById("extractedText");
+        const recognitionMessage = document.getElementById("recognitionMessage");
+        const saveMessage = document.getElementById("saveScheduleMessage");
+
+        const analyzeButton = document.getElementById("analyzeScheduleButton");
+        const saveButton = document.getElementById("saveScheduleButton");
+
+        uploadForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const file = imageInput.files[0];
+            const section = sectionInput.value.trim();
+
+            recognitionMessage.textContent = "";
+            saveMessage.textContent = "";
+
+            if (!section) {
+                recognitionMessage.textContent = "Enter a section name first.";
+                return;
+            }
+
+            if (!file) {
+                recognitionMessage.textContent = "Choose a timetable image first.";
+                return;
+            }
+
+            const allowedTypes = [
+                "image/jpeg",
+                "image/png",
+                "image/webp"
+            ];
+
+            if (!allowedTypes.includes(file.type)) {
+                recognitionMessage.textContent =
+                    "Please choose a JPG, PNG, or WEBP image.";
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                recognitionMessage.textContent =
+                    "The image exceeds the 5 MB limit.";
+                return;
+            }
+
+            analyzeButton.disabled = true;
+            analyzeButton.textContent = "Analyzing...";
+            recognitionMessage.textContent =
+                "Reading the timetable. The first analysis may take a little while.";
+
+            try {
+                const formData = new FormData();
+                formData.append("timetable", file);
+
+                const response = await fetch("/api/schedules/recognize", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || "Image analysis failed.");
+                }
+
+                extractedText.value = result.extractedText || "";
+                confirmedSection.value = section;
+
+                recognitionMessage.textContent =
+                    "Text extraction complete. Review your timetable and enter the four start times below.";
+
+                document.getElementById("mondayStart").focus();
+            } catch (error) {
+                recognitionMessage.textContent =
+                    error.message || "Could not analyze the image.";
+            } finally {
+                analyzeButton.disabled = false;
+                analyzeButton.textContent = "Analyze Timetable";
+            }
+        });
+
+        saveForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            saveMessage.textContent = "";
+
+            const section = confirmedSection.value.trim();
+
+            if (!section) {
+                saveMessage.textContent =
+                    "Analyze the timetable and confirm the section name first.";
+                return;
+            }
+
+            const schedule = {
+                section,
+                monday: document.getElementById("mondayStart").value,
+                tuesday: document.getElementById("tuesdayStart").value,
+                wednesday: document.getElementById("wednesdayStart").value,
+                thursday: document.getElementById("thursdayStart").value
+            };
+
+            if (
+                !schedule.monday ||
+                !schedule.tuesday ||
+                !schedule.wednesday ||
+                !schedule.thursday
+            ) {
+                saveMessage.textContent =
+                    "Please confirm the start time for all four school days.";
+                return;
+            }
+
+            saveButton.disabled = true;
+            saveButton.textContent = "Saving...";
+
+            try {
+                const response = await fetch("/api/schedules/save", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(schedule)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || "Could not save schedule.");
+                }
+
+                saveMessage.textContent = result.message;
+            } catch (error) {
+                saveMessage.textContent =
+                    error.message || "Could not save the schedule.";
+            } finally {
+                saveButton.disabled = false;
+                saveButton.textContent = "Save Confirmed Schedule";
+            }
+        });
+    </script>
+</body>
+</html>
